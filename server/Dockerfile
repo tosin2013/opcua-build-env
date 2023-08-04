@@ -14,7 +14,7 @@ RUN cd milo && mvn clean install -DskipTests && cd /app
 RUN ls -R /app
 
 # Copy the directory contents of the milo's directory into the container at /app
-RUN cp milo/opc-ua-stack/target/milo-opcua-server-jar-with-dependencies.jar /app
+RUN cp  milo/milo-examples/server-examples/target/server-examples-0.6.11-SNAPSHOT.jar /app
 
 # Add seperate directory for secrets that should not be copied into image for reuseability
 VOLUME /app/certificates
@@ -28,4 +28,4 @@ ENV OPCUA_CERT_DIR "/app/certificates"
 EXPOSE 4840
 
 # Run example client
-CMD ["java", "-jar", "milo-opcua-server-jar-with-dependencies.jar"]
+CMD ["java", "-jar", "server-examples-0.6.11-SNAPSHOT.jar"]
