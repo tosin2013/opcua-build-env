@@ -8,7 +8,10 @@ WORKDIR /app
 RUN git clone https://github.com/eclipse/milo.git
 
 # Go into directory that was checked out and use maven to build a server jar
-RUN cd milo/opc-ua-stack && mvn package -P standalone -Dmaven.test.failure.ignore=true && cd /app
+# RUN cd milo/opc-ua-stack && mvn package -P standalone -Dmaven.test.failure.ignore=true && cd /app
+RUN cd milo && mvn clean install -DskipTests && cd /app
+
+RUN ls -R /app
 
 # Copy the directory contents of the milo's directory into the container at /app
 RUN cp milo/opc-ua-stack/target/milo-opcua-server-jar-with-dependencies.jar /app
