@@ -1,0 +1,16 @@
+name: Build and push Docker image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Buildx
+        uses: docker/setup-buildx@v1
+      - name: Build image
+        run: docker build ./server  -t server-build
